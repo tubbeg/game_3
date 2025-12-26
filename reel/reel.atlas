@@ -1,0 +1,64 @@
+animations {
+  id: "7"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "omega"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "tau"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "pi"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "epsilon"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "phi"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "sigma"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols5.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "beta"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "death"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

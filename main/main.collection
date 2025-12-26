@@ -25,7 +25,7 @@ instances {
 }
 scale_along_z: 0
 embedded_instances {
-  id: "go"
+  id: "main"
   data: "components {\n"
   "  id: \"main\"\n"
   "  component: \"/main/main.script\"\n"
@@ -37,10 +37,26 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "go1"
+  id: "discard"
   data: "components {\n"
   "  id: \"discard\"\n"
   "  component: \"/discard/discard.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "lever"
+  data: "components {\n"
+  "  id: \"lever\"\n"
+  "  component: \"/lever/lever.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "payout"
+  data: "components {\n"
+  "  id: \"payout\"\n"
+  "  component: \"/payout/payout.gui\"\n"
   "}\n"
   ""
 }

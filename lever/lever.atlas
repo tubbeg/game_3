@@ -1,0 +1,15 @@
+animations {
+  id: "open"
+  images {
+    image: "/assets/images/dummy-lever1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "closed"
+  images {
+    image: "/assets/images/dummy-lever2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

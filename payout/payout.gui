@@ -1,3 +1,17 @@
 script: "/payout/payout.gui_script"
+nodes {
+  position {
+    x: 284.0
+    y: 173.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
