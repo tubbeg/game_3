@@ -1,0 +1,31 @@
+
+
+function init(self)
+	self.coins = 30
+
+	local node = gui.get_node("text")
+	local s = tostring(self.coins) .. " $"
+	gui.set_text(node, s)
+end
+
+function final(self)
+end
+
+function update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("get_coin") and self.coins > 0 then
+		msg.post("coin_slot", "cache_coin")
+		self.coins = self.coins - 1
+		local node = gui.get_node("text")
+		local s = tostring(self.coins) .. " $"
+		gui.set_text(node, s)
+		if self.coins < 1 then
+			msg.post("coin_slot", "empty_coin")
+		end
+	end
+end
+
+function on_reload(self)
+end

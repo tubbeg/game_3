@@ -37,14 +37,6 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "discard"
-  data: "components {\n"
-  "  id: \"discard\"\n"
-  "  component: \"/discard/discard.gui\"\n"
-  "}\n"
-  ""
-}
-embedded_instances {
   id: "lever"
   data: "components {\n"
   "  id: \"lever\"\n"
@@ -53,10 +45,42 @@ embedded_instances {
   ""
 }
 embedded_instances {
-  id: "payout"
+  id: "coin_slot"
   data: "components {\n"
-  "  id: \"payout\"\n"
-  "  component: \"/payout/payout.gui\"\n"
+  "  id: \"coin_slot\"\n"
+  "  component: \"/coin_slot/coin_slot.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "coins"
+  data: "components {\n"
+  "  id: \"coins\"\n"
+  "  component: \"/coins/coins.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "score"
+  data: "components {\n"
+  "  id: \"score\"\n"
+  "  component: \"/score/score.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "target"
+  data: "components {\n"
+  "  id: \"target\"\n"
+  "  component: \"/target/target.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "lock"
+  data: "components {\n"
+  "  id: \"lock\"\n"
+  "  component: \"/lock/lock.gui\"\n"
   "}\n"
   ""
 }

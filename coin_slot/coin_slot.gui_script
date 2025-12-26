@@ -1,6 +1,8 @@
 function init(self)
+	self.cached_coins = 0
+	self.max_cache = 3
+	self.iteration = 1
 	msg.post(".", "acquire_input_focus")
-	self.timer = nil
 end
 
 function final(self)
@@ -16,18 +18,29 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("spin") and self.cached_coins > 0 then
+		local reel_msg = {iteration=self.iteration}
+		msg.post("reel1", "spin", reel_msg)
+		msg.post("reel2", "spin", reel_msg)
+		msg.post("reel3", "spin", reel_msg)
+		self.iteration = self.iteration + 1
+	end
+	if message_id == hash("cache_coin") then
+		self.cached_coins = self.cached_coins + 1
+	end
+	if message_id == hash("cache_coin_get") then
+		
+		msg.post("score", "cache_coin_ret", {cache=self.cached_coins})
+		self.cached_coins = 0
+	end
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
 		local node = gui.get_node("box")
-		if gui.pick_node(node, action.x, action.y) then
-			msg.post("coin_slot", "spin")
-			gui.play_flipbook(node, "closed")
-			self.timer = timer.delay(.5, false, function () gui.play_flipbook(node, "open") end)
+		if gui.pick_node(node, action.x, action.y)
+		and self.cached_coins < self.max_cache then
+			msg.post("coins","get_coin")
 		end
 	end
 end

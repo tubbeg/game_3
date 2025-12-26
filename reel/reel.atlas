@@ -1,5 +1,5 @@
 animations {
-  id: "7"
+  id: "seven"
   images {
     image: "/assets/images/dummy-placeholder-symbols1.png"
   }
@@ -58,6 +58,31 @@ animations {
   id: "death"
   images {
     image: "/assets/images/dummy-placeholder-symbols8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "spin"
+  images {
+    image: "/assets/images/dummy-placeholder-symbols1.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols2.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols3.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols4.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols5.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols6.png"
+  }
+  images {
+    image: "/assets/images/dummy-placeholder-symbols7.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }

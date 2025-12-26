@@ -1,12 +1,12 @@
-script: "/discard/discard.gui_script"
+script: "/coin_slot/coin_slot.gui_script"
 nodes {
   position {
-    x: 414.0
-    y: 243.0
+    x: 229.0
+    y: 210.0
   }
   scale {
-    x: 0.621431
-    y: 0.54044
+    x: 0.12492
+    y: 0.734546
   }
   size {
     x: 200.0
