@@ -1,0 +1,21 @@
+script: "/discard/discard.gui_script"
+nodes {
+  position {
+    x: 414.0
+    y: 243.0
+  }
+  scale {
+    x: 0.621431
+    y: 0.54044
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

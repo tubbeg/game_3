@@ -9,8 +9,8 @@ game_binding = /input/game.input_bindingc
 use_accelerometer = 0
 
 [display]
-width = 1280
-height = 720
+width = 640
+height = 576
 high_dpi = 1
 
 [script]
@@ -32,4 +32,11 @@ velocity_threshold = 100.0
 
 [html5]
 scale_mode = stretch
+
+[sprite]
+subpixels = 0
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
 
