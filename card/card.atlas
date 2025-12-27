@@ -1,14 +1,56 @@
 animations {
-  id: "back"
+  id: "back_1"
   images {
-    image: "/assets/images/card_no_trust1.png"
+    image: "/assets/images/card_back1.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
 animations {
-  id: "one"
+  id: "back_2"
   images {
-    image: "/assets/images/card_no_trust2.png"
+    image: "/assets/images/card_back2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "back_3"
+  images {
+    image: "/assets/images/card_back3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "back_4"
+  images {
+    image: "/assets/images/card_back4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "back_5"
+  images {
+    image: "/assets/images/card_back5.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "sword"
+  images {
+    image: "/assets/images/sword.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "diamond"
+  images {
+    image: "/assets/images/diamond.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "crown"
+  images {
+    image: "/assets/images/crown.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }

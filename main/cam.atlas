@@ -1,0 +1,8 @@
+animations {
+  id: "scope"
+  images {
+    image: "/assets/images/scope.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2
