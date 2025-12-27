@@ -1,14 +1,14 @@
 animations {
-  id: "open"
+  id: "back"
   images {
-    image: "/assets/images/dummy-lever1.png"
+    image: "/assets/images/card_no_trust1.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
 animations {
-  id: "closed"
+  id: "one"
   images {
-    image: "/assets/images/dummy-lever2.png"
+    image: "/assets/images/card_no_trust2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
