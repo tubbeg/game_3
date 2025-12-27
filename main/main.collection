@@ -1,28 +1,4 @@
 name: "main"
-instances {
-  id: "reel3"
-  prototype: "/reel/reel.go"
-  position {
-    x: 500.0
-    y: 350.0
-  }
-}
-instances {
-  id: "reel1"
-  prototype: "/reel/reel.go"
-  position {
-    x: 200.0
-    y: 350.0
-  }
-}
-instances {
-  id: "reel2"
-  prototype: "/reel/reel.go"
-  position {
-    x: 350.0
-    y: 350.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "main"
@@ -30,57 +6,79 @@ embedded_instances {
   "  id: \"main\"\n"
   "  component: \"/main/main.script\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite1\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"back\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 576.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/main.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    z: -500.0\n"
+  "  }\n"
+  "}\n"
   ""
   position {
-    x: 640.0
-    y: 360.0
+    x: 500.0
+    y: 499.0
+    z: 301.0
   }
 }
 embedded_instances {
-  id: "lever"
+  id: "cam"
   data: "components {\n"
-  "  id: \"lever\"\n"
-  "  component: \"/lever/lever.gui\"\n"
+  "  id: \"cam\"\n"
+  "  component: \"/main/cam.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"camera\"\n"
+  "  type: \"camera\"\n"
+  "  data: \"aspect_ratio: 1.0\\n"
+  "fov: 0.7854\\n"
+  "near_z: 0.1\\n"
+  "far_z: 1000.0\\n"
+  "orthographic_projection: 1\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"scope\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/cam.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    z: -486.0\n"
+  "  }\n"
   "}\n"
   ""
+  position {
+    x: 352.0
+    y: 347.0
+    z: 526.0
+  }
 }
 embedded_instances {
-  id: "coin_slot"
+  id: "card_keeper"
   data: "components {\n"
-  "  id: \"coin_slot\"\n"
-  "  component: \"/coin_slot/coin_slot.gui\"\n"
+  "  id: \"card_keeper\"\n"
+  "  component: \"/main/card_keeper.script\"\n"
   "}\n"
-  ""
-}
-embedded_instances {
-  id: "coins"
-  data: "components {\n"
-  "  id: \"coins\"\n"
-  "  component: \"/coins/coins.gui\"\n"
-  "}\n"
-  ""
-}
-embedded_instances {
-  id: "score"
-  data: "components {\n"
-  "  id: \"score\"\n"
-  "  component: \"/score/score.gui\"\n"
-  "}\n"
-  ""
-}
-embedded_instances {
-  id: "target"
-  data: "components {\n"
-  "  id: \"target\"\n"
-  "  component: \"/target/target.gui\"\n"
-  "}\n"
-  ""
-}
-embedded_instances {
-  id: "lock"
-  data: "components {\n"
-  "  id: \"lock\"\n"
-  "  component: \"/lock/lock.gui\"\n"
+  "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/card/card.go\\\"\\n"
+  "\"\n"
   "}\n"
   ""
 }

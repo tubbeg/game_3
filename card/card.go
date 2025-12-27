@@ -1,15 +1,15 @@
 components {
-  id: "reel"
-  component: "/reel/reel.script"
+  id: "card"
+  component: "/card/card.script"
 }
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"beta\"\n"
+  data: "default_animation: \"back_1\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/reel/reel.atlas\"\n"
+  "  texture: \"/card/card.atlas\"\n"
   "}\n"
   ""
   scale {

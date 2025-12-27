@@ -1,0 +1,84 @@
+
+local function choose_random_back()
+	local nr = math.random(1, 5)
+	return "back" .. "_" .. tostring(nr)
+end
+
+local function choose_random_front()
+	local fronts = {"diamond", "sword", "crown"}
+	return fronts[math.random(1, 3)]
+end
+
+local function camera_is_far_away()
+	local cam_pos = go.get_position("cam")
+	local pos = go.get_position()
+	return cam_pos.x > pos.x + 200 or cam_pos.x < pos.x - 200
+	and cam_pos.y > pos.y + 200 or cam_pos.y < pos.y - 200
+end
+
+function init(self)
+	math.randomseed(socket.gettime()*10000)
+	self.inspected = false
+	self.card = choose_random_front()
+	self.back = choose_random_back()
+	self.pair_found = false
+	sprite.play_flipbook("#sprite", self.back)
+	local fn = function ()
+		if not self.inspected and camera_is_far_away() then
+			self.back = choose_random_back()
+			sprite.play_flipbook("#sprite", self.back)
+		end
+	end
+	timer.delay(math.random(10,20), true, fn)
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+local function click_on_sprite(mouse_pos, pos)
+	return
+	mouse_pos.x < pos.x + 35 and mouse_pos.x > pos.x - 35 and
+	mouse_pos.y < pos.y + 35 and mouse_pos.y > pos.y - 35
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("click_card") and
+	click_on_sprite(message.pos, go.get_position()) then
+		if self.pair_found then return end
+		msg.post("card_keeper", "is_inspected")
+	end
+	if message_id == hash("set_inspect") then
+		if self.pair_found then return end
+		self.inspected = true
+		sprite.play_flipbook("#sprite", self.card)
+		msg.post("card_keeper","inspect_result", {card=self.card})
+	end
+	if message_id == hash("de_inspect") then
+		if self.pair_found then return end
+		if self.inspected then
+			self.inspected = false
+			local function fn() sprite.play_flipbook("#sprite", self.back) end
+			timer.delay(1, false, fn)
+		end
+	end
+	if message_id == hash("pair_found") and self.inspected then
+		self.pair_found = true
+		print("found a pair!")
+	end
+end
+
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
