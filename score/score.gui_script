@@ -66,7 +66,7 @@ local function calc_score(reels,cache)
 	elseif reels[1] == "beta" and reels[2] == "beta" and reels[3] == "beta" then
 		return 2
 	end
-	return 0
+	return 100
 end
 
 function on_message(self, message_id, message, sender)
@@ -82,6 +82,7 @@ function on_message(self, message_id, message, sender)
 		local node = gui.get_node("text")
 		local s = tostring(self.score) .. " $"
 		gui.set_text(node, s)
+		msg.post("target", "result_score",{score=self.score})
 	end
 end
 

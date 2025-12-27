@@ -25,6 +25,9 @@ function on_message(self, message_id, message, sender)
 			msg.post("coin_slot", "empty_coin")
 		end
 	end
+	if message_id == hash("get_remaining_coin") then
+		msg.post(sender, "remaining_coin", {coins=self.coins})
+	end
 end
 
 function on_reload(self)

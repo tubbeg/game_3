@@ -4,7 +4,7 @@ function init(self)
 	self.locks = 3
 
 	local node = gui.get_node("text")
-	local s = tostring(self.target)
+	local s = tostring(self.locks)
 	gui.set_text(node, s)
 end
 
@@ -15,6 +15,13 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("get_lock") and self.locks > 0 then
+		msg.post(sender, "ok_lock")
+		self.locks = self.locks - 1
+		local node = gui.get_node("text")
+		local s = tostring(self.locks)
+		gui.set_text(node, s)
+	end
 end
 
 function on_reload(self)

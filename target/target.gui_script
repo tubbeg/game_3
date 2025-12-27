@@ -2,7 +2,8 @@
 
 function init(self)
 	self.target = 80
-
+	self.level = 1
+	self.first_play = true
 	local node = gui.get_node("text")
 	local s = tostring(self.target) .. " $"
 	gui.set_text(node, s)
@@ -15,6 +16,27 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("result_score") then
+		if message.score > self.target then
+			msg.post("victory", "init")
+		else
+			msg.post("coins","get_remaining_coin")
+		end
+	end
+	if message_id == hash("remaining_coin") then
+		if message.coins < 1 then
+			msg.post("defeat", "init")
+		end
+	end
+	if message_id == hash("is_first_play") then
+		msg.post(sender, "first_play", {first_play=self.first_play})
+	end
+	if message_id == hash("set_first_play") then
+		self.first_play = message.first_play
+		msg.post("reel1", "first_play", {first_play=self.first_play})
+		msg.post("reel2", "first_play", {first_play=self.first_play})
+		msg.post("reel3", "first_play", {first_play=self.first_play})
+	end
 end
 
 function on_reload(self)

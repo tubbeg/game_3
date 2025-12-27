@@ -84,3 +84,15 @@ embedded_instances {
   "}\n"
   ""
 }
+embedded_instances {
+  id: "defeat"
+  data: ""
+}
+embedded_instances {
+  id: "victory"
+  data: "components {\n"
+  "  id: \"victory\"\n"
+  "  component: \"/victory/victory.gui\"\n"
+  "}\n"
+  ""
+}

@@ -37,8 +37,10 @@ function init(self)
 	self.reel_type = 1
 	self.timer = nil
 	self.timer_delays = {[1]=1,[2]=1.5,[3]=2}
-	self.queue = {}
-	self.memory_limit = 5
+	self.is_locked = false
+	self.current_symbol = "beta"
+	self.first_play = false
+	msg.post(".", "acquire_input_focus")
 end
 
 function final(self)
@@ -65,7 +67,6 @@ local function get_table_size(t)
 	return i
 end
 
-
 local function generate_reel(reel_type)
 	math.randomseed(socket.gettime()*10000)
 	local reel = {}
@@ -89,49 +90,48 @@ local function generate_reel(reel_type)
 	return reel
 end
 
-local function generate_queue (reel, memory_limit)
-	local i = 0
-	local queue = {}
-	while i < memory_limit do
-		local index = math.random(1, get_table_size(reel))
-		table.insert(queue, reel[index])
-		i = i + 1
-	end
-	return queue
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("spin") and self.reel then
+		if self.is_locked then
+			local score_msg = {reel=self.reel_type, result=self.current_symbol}
+			msg.post("score", "spin_result", score_msg)
+			self.is_locked = false
+			return
+		end
 		sprite.play_flipbook("#sprite", "spin")
 		local fn = function ()
-			if message.iteration > self.memory_limit then
-				print("TBD")
-			else
-				local totally_random_symbol = self.queue[message.iteration]
-				sprite.play_flipbook("#sprite", totally_random_symbol)
-				local score_msg = {reel=self.reel_type, result=totally_random_symbol}
-				msg.post("score", "spin_result", score_msg)
-			end
+			self.current_symbol = self.reel[math.random(1,get_table_size(self.reel))]
+			sprite.play_flipbook("#sprite", self.current_symbol)
+			local score_msg = {reel=self.reel_type, result=self.current_symbol}
+			msg.post("score", "spin_result", score_msg)
 		end
 		self.timer = timer.delay(self.timer_delays[self.reel_type], false, fn)
 	end
 	if message_id == hash("set_reel") then
 		self.reel_type = message.reel_type
 		self.reel = generate_reel(message.reel_type)
-		self.queue = generate_queue(self.reel, self.memory_limit)
+		msg.post("target", "is_first_play")
+	end
+	if message_id == hash("first_play") then
+		self.first_play = message.first_play
+	end
+	if message_id == hash("ok_lock") then
+		self.is_locked = true
 	end
 end
 
+local function click_on_sprite (action, pos)
+	return
+	action.x > pos.x - 32 and action.x < pos.x + 32 and
+	action.y > pos.y - 32 and action.y < pos.y + 32
+end
+
 function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
+	if action_id == hash("touch") and action.pressed and not self.is_locked then
+		if click_on_sprite(action, go.get_position())  then
+			msg.post("lock", "get_lock")
+		end
+	end
 end
 
 function on_reload(self)
