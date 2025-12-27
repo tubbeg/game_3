@@ -3,6 +3,8 @@
 
 function init(self)
 	self.cards = {}
+	self.result = nil
+	self.inspected = 0
 	math.randomseed(socket.gettime()*10000)
 	local starter_pos = vmath.vector3(80,800,0)
 	for i=1,100 do
@@ -40,18 +42,36 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("next_up") then
-		--print("sender", sender)
-		for i,card in pairs(self.cards) do
-			local url = msg.url(nil, card.id, "card")
-			if url == sender then
-				
-			end
-		end
-	end
 	if message_id == hash("click_card") then
 		for _, card in pairs(self.cards) do
 			msg.post(card.id, "click_card", {pos=message.pos})
+		end
+	end
+	if message_id == hash("is_inspected") then
+		if self.inspected < 2 then
+			self.inspected = self.inspected + 1
+			msg.post(sender, "set_inspect")
+		end
+	end
+	if message_id == hash("inspect_result") then
+		if not self.result then self.result = {} end
+		table.insert(self.result, message.card)
+		local i = 0
+		for _,_ in pairs(self.result) do
+			i = i + 1
+		end
+		if i >= 2 then
+			if self.result[1] == self.result[2] then
+				for _, card in pairs(self.cards) do
+					msg.post(card.id, "pair_found")
+				end
+			else
+				for _, card in pairs(self.cards) do
+					msg.post(card.id, "de_inspect")
+				end
+			end
+			self.result = nil
+			self.inspected = 0
 		end
 	end
 end
