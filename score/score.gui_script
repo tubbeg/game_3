@@ -1,5 +1,6 @@
 function init(self)
 	self.score = 0
+	gui.set_enabled(gui.get_node("score"), true)
 	gui.set_text(gui.get_node("score"), "SCORE: " .. tostring(self.score))
 end
 
@@ -25,6 +26,11 @@ function on_message(self, message_id, message, sender)
 	gui.set_text(gui.get_node("score"), "SCORE: " .. tostring(self.score))
 	if message_id == hash("hide") then
 		gui.set_enabled(gui.get_node("score"), false)
+	end
+	if message_id == hash("reset_game") then
+		self.score = 0
+		gui.set_enabled(gui.get_node("score"), true)
+		gui.set_text(gui.get_node("score"), "SCORE: " .. tostring(self.score))
 	end
 end
 

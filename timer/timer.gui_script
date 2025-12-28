@@ -4,8 +4,9 @@ local function init_final_msg()
 	msg.post("cam", "death")
 end
 
-function init(self)
-	self.current_time = 5
+local function init_timer (self)
+	gui.set_enabled(gui.get_node("time"), true)
+	self.current_time = 60
 	self.alive = true
 	gui.set_text(gui.get_node("time"),  tostring(self.current_time))
 	local fn = function ()
@@ -18,7 +19,14 @@ function init(self)
 			init_final_msg()
 		end
 	end
+	if self.timer then 
+		timer.cancel(self.timer)
+	end
 	self.timer = timer.delay(1, true, fn)
+end
+
+function init(self)
+	init_timer(self)
 end
 
 function final(self)
@@ -50,6 +58,9 @@ function on_message(self, message_id, message, sender)
 	end
 	if message_id == hash("hide") then
 		gui.set_enabled(gui.get_node("time"), false)
+	end
+	if message_id == hash("reset_game") then
+		init_timer(self)
 	end
 end
 

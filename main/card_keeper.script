@@ -8,8 +8,8 @@ local function create_card(pos, cards)
 	table.insert(cards, {id=id,pos=vmath.vector3(pos)})
 end
 
-function init(self)
-	
+local function init_cards (self)
+
 	self.cards_nr = 82
 	self.cards = {}
 	self.result = nil
@@ -23,8 +23,10 @@ function init(self)
 			starter_pos.y = starter_pos.y - 85
 		end
 	end
-	--local random_card = self.cards[math.random(1,100)]
-	--msg.post(random_card.id, "selected")
+end
+
+function init(self)
+	init_cards(self)
 end
 
 function final(self)
@@ -75,6 +77,10 @@ local function remove_all_cards(self)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("reset_game") then
+		print("resetting game")
+		init_cards(self)
+	end
 	if message_id == hash("boom") then
 		for _, card in pairs(self.cards) do
 			msg.post(card.id, "de_inspect")

@@ -42,7 +42,7 @@ local function screen_to_world(x, y, z, camera_id)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("die") then go.delete(".", true) end
+	if message_id == hash("reset_game") then self.defeat = false end
 	if message_id == hash("focus_me") then
 		local pos = vmath.vector3(message.pos.x, message.pos.y, 500)
 		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.5, 0)
