@@ -13,8 +13,8 @@ end
 
 local function choose_random_front()
 	seed_random()
-	local fronts = {"diamond", "sword", "crown"}
-	return fronts[math.random(1, 3)]
+	local fronts = {"diamond", "sword", "crown", "blood", "eye", "bow", "time", "bomb"}
+	return fronts[math.random(1, 8)]
 end
 
 local function camera_is_far_away()
@@ -26,6 +26,7 @@ end
 
 
 function init(self)
+	self.bomb_timer_started = false
 	self.inspected = false
 	self.card = choose_random_front()
 	self.back = choose_random_back()
@@ -62,17 +63,31 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("click_card") and
 	click_on_sprite(message.pos, go.get_position()) then
 		if self.pair_found then return end
-		msg.post("card_keeper", "is_inspected")
+		msg.post("card_keeper", "is_inspected", {card=self.card})
 	end
 	if message_id == hash("set_inspect") then
 		if self.pair_found then return end
 		self.inspected = true
+		if message.start_timer then
+			local fn = function ()
+				self.bomb_timer_started = true
+				msg.post("card_keeper", "boom")
+			end
+			timer.delay(4, false, fn)
+		end
 		sprite.play_flipbook("#sprite", self.card)
 		msg.post("card_keeper","inspect_result", {card=self.card})
 	end
 	if message_id == hash("de_inspect") then
 		if self.pair_found then return end
-		if self.inspected then
+		if self.bomb_timer_started then
+			sprite.play_flipbook("#sprite", "boom")
+			local fn = function ()
+				msg.post("timer", "whip")
+				msg.post("card_keeper", "delete_me")
+			end
+			timer.delay(2, false, fn)
+		elseif self.inspected then
 			self.inspected = false
 			local function fn() sprite.play_flipbook("#sprite", self.back) end
 			timer.delay(0.5, false, fn)

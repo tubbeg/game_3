@@ -54,4 +54,46 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "blood"
+  images {
+    image: "/assets/images/blood.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "eye"
+  images {
+    image: "/assets/images/eye.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "bow"
+  images {
+    image: "/assets/images/bow.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "bomb"
+  images {
+    image: "/assets/images/bomb.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "time"
+  images {
+    image: "/assets/images/time.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "boom"
+  images {
+    image: "/assets/images/boom.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

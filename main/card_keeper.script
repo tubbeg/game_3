@@ -67,7 +67,27 @@ local function remove_card(cards, sender_url)
 	return nil
 end
 
+local function remove_all_cards(self)
+	for _,card in pairs(self.cards) do
+		go.delete(card.id, true)
+	end
+	self.cards = nil
+end
+
 function on_message(self, message_id, message, sender)
+	if message_id == hash("boom") then
+		for _, card in pairs(self.cards) do
+			msg.post(card.id, "de_inspect")
+		end
+		self.result = nil
+		self.inspected = 0
+	end
+	if message_id == hash("die") then
+		remove_all_cards(self)
+		go.delete(".", true)
+		go.delete("timer", true)
+		go.delete("score", true)
+	end
 	if message_id == hash("delete_me") then
 		local nil_pos = remove_card(self.cards, sender)
 		if nil_pos then
@@ -82,7 +102,11 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("is_inspected") then
 		if self.inspected < 2 then
 			self.inspected = self.inspected + 1
-			msg.post(sender, "set_inspect")
+			if message.card == "bomb" then
+				msg.post(sender, "set_inspect", {start_timer=true})
+			else
+				msg.post(sender, "set_inspect", {start_timer=false})
+			end
 		end
 	end
 	if message_id == hash("inspect_result") then
@@ -94,7 +118,14 @@ function on_message(self, message_id, message, sender)
 		end
 		if i >= 2 then
 			if self.result[1] == self.result[2] then
-				msg.post("score", "add_score")
+				local score = 1
+				if self.result[1] == "time" then
+					msg.post("timer", "carrot")
+				elseif self.result[1] == "bomb" then
+					msg.post("score", "add_extra_score")
+				else
+					msg.post("score", "add_score")
+				end 
 				for _, card in pairs(self.cards) do
 					msg.post(card.id, "pair_found")
 				end

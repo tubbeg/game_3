@@ -1,16 +1,16 @@
-script: "/result_message/result_message.gui_script"
+script: "/death/death.gui_script"
 fonts {
   name: "rf"
   font: "/assets/fonts/rf.font"
 }
 nodes {
   position {
-    x: 318.0
-    y: 294.0
+    x: 326.0
+    y: 272.0
   }
   scale {
-    x: 2.521872
-    y: 5.501963
+    x: 3.699861
+    y: 6.80364
   }
   size {
     x: 200.0
@@ -22,18 +22,18 @@ nodes {
     z: 0.149
   }
   type: TYPE_BOX
-  id: "result"
+  id: "res"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: -7.137555
-    y: 32.170334
+    x: -6.123153
+    y: 19.746252
   }
   scale {
-    x: 0.850938
-    y: 0.223573
+    x: 0.449973
+    y: 0.123477
   }
   size {
     x: 200.0
@@ -45,20 +45,20 @@ nodes {
     z: 0.725
   }
   type: TYPE_TEXT
-  text: "DEATH"
+  text: "SCORE: 0"
   font: "rf"
-  id: "text"
-  parent: "result"
+  id: "score"
+  parent: "res"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: -5.947962
-    y: -23.809683
+    x: -4.16171
+    y: -18.471546
   }
   scale {
-    x: 0.7809
-    y: 0.333136
+    x: 0.500226
+    y: 0.202844
   }
   size {
     x: 200.0
@@ -71,13 +71,14 @@ nodes {
   }
   type: TYPE_BOX
   id: "box"
-  parent: "result"
+  parent: "res"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   scale {
-    x: 0.714143
+    x: 0.571821
+    y: 0.562692
   }
   size {
     x: 200.0
@@ -91,33 +92,8 @@ nodes {
   type: TYPE_TEXT
   text: "PLAY AGAIN?"
   font: "rf"
-  id: "text1"
+  id: "text"
   parent: "box"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: -9.516739
-    y: 6.361366
-  }
-  scale {
-    x: 0.399587
-    y: 0.160918
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.722
-    y: 0.761
-    z: 0.725
-  }
-  type: TYPE_TEXT
-  text: "FINAL SCORE: 0"
-  font: "rf"
-  id: "score"
-  parent: "result"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

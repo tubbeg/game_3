@@ -1,5 +1,5 @@
 function init(self)
-	gui.set_enabled(gui.get_node("result"), false)
+	gui.set_enabled(gui.get_node("res"), false)
 end
 
 function final(self)
@@ -15,8 +15,12 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("win") then
-		gui.set_enabled(gui.get_node("result"), false)
+	if message_id == hash("show") then
+		gui.set_enabled(gui.get_node("res"), true)
+		msg.post("card_keeper", "die")
+		--msg.post("cam", "focus_me", {pos=vmath.vector3(0,0,0)})
+		--msg.post("cam", "die")
+		gui.set_text(gui.get_node("score"), "FINAL SCORE: " .. tostring(message.score))
 		msg.post(".", "acquire_input_focus")
 	end
 end
