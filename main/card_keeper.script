@@ -84,9 +84,9 @@ function on_message(self, message_id, message, sender)
 	end
 	if message_id == hash("die") then
 		remove_all_cards(self)
-		go.delete(".", true)
-		go.delete("timer", true)
-		go.delete("score", true)
+		msg.post("timer", "reset")
+		msg.post("timer", "hide")
+		msg.post("score", "hide")
 	end
 	if message_id == hash("delete_me") then
 		local nil_pos = remove_card(self.cards, sender)

@@ -5,7 +5,7 @@ local function init_final_msg()
 end
 
 function init(self)
-	self.current_time = 300
+	self.current_time = 5
 	self.alive = true
 	gui.set_text(gui.get_node("time"),  tostring(self.current_time))
 	local fn = function ()
@@ -47,6 +47,9 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("carrot") and self.alive then
 		self.current_time = self.current_time + 10
 		gui.set_text(gui.get_node("time"),  tostring(self.current_time))
+	end
+	if message_id == hash("hide") then
+		gui.set_enabled(gui.get_node("time"), false)
 	end
 end
 
