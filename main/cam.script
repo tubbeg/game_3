@@ -49,7 +49,7 @@ function on_message(self, message_id, message, sender)
 end
 
 local function is_out_of_bounds(x,y)
-	return x > 800 or x < 50 or y > 800 or y < 50
+	return x > 1100 or x < 50 or y > 900 or y < 330
 end
 
 function on_input(self, action_id, action)

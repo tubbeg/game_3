@@ -1,17 +1,24 @@
 
 
 
+local function create_card(pos, cards)
+	local spawn_pos = vmath.vector3(-500,-500,0)
+	local id = factory.create("#factory", spawn_pos)
+	go.animate(id, "position", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(pos), go.EASING_LINEAR, 4, 0)
+	table.insert(cards, {id=id,pos=vmath.vector3(pos)})
+end
+
 function init(self)
+	
+	self.cards_nr = 82
 	self.cards = {}
 	self.result = nil
 	self.inspected = 0
-	math.randomseed(socket.gettime()*10000)
-	local starter_pos = vmath.vector3(80,800,0)
-	for i=1,100 do
-		local id = factory.create("#factory", starter_pos)
-		table.insert(self.cards, {id=id,pos=vmath.vector3(starter_pos)})
+	local starter_pos = vmath.vector3(80,900,0)
+	for i=1,self.cards_nr do
+		create_card(starter_pos, self.cards)
 		starter_pos.x = starter_pos.x + 85
-		if starter_pos.x > 800 then
+		if starter_pos.x > 1050 then
 			starter_pos.x = 80
 			starter_pos.y = starter_pos.y - 85
 		end
@@ -41,7 +48,32 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+local function remove_card(cards, sender_url)
+	local found_card = nil
+	local index = nil
+	for i,card in pairs(cards) do
+		local url = msg.url(nil, card.id, "card")
+		if sender_url == url then
+			found_card = card
+			index = i
+		end
+	end
+	if found_card then
+		local pos = vmath.vector3(found_card.pos.x, found_card.pos.y,0)
+		go.delete(found_card.id)
+		table.remove(cards,index)
+		return pos
+	end
+	return nil
+end
+
 function on_message(self, message_id, message, sender)
+	if message_id == hash("delete_me") then
+		local nil_pos = remove_card(self.cards, sender)
+		if nil_pos then
+			create_card(vmath.vector3(nil_pos), self.cards)
+		end
+	end
 	if message_id == hash("click_card") then
 		for _, card in pairs(self.cards) do
 			msg.post(card.id, "click_card", {pos=message.pos})
@@ -62,6 +94,7 @@ function on_message(self, message_id, message, sender)
 		end
 		if i >= 2 then
 			if self.result[1] == self.result[2] then
+				msg.post("score", "add_score")
 				for _, card in pairs(self.cards) do
 					msg.post(card.id, "pair_found")
 				end

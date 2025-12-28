@@ -30,6 +30,10 @@ embedded_instances {
     y: 499.0
     z: 301.0
   }
+  scale3 {
+    x: 3.0
+    y: 3.0
+  }
 }
 embedded_instances {
   id: "cam"
@@ -84,13 +88,25 @@ embedded_instances {
 }
 embedded_instances {
   id: "defeat"
-  data: ""
+  data: "components {\n"
+  "  id: \"result_message\"\n"
+  "  component: \"/result_message/result_message.gui\"\n"
+  "}\n"
+  ""
 }
 embedded_instances {
-  id: "victory"
+  id: "score"
   data: "components {\n"
-  "  id: \"victory\"\n"
-  "  component: \"/victory/victory.gui\"\n"
+  "  id: \"score\"\n"
+  "  component: \"/score/score.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "timer"
+  data: "components {\n"
+  "  id: \"timer\"\n"
+  "  component: \"/timer/timer.gui\"\n"
   "}\n"
   ""
 }

@@ -1,0 +1,124 @@
+script: "/result_message/result_message.gui_script"
+fonts {
+  name: "rf"
+  font: "/assets/fonts/rf.font"
+}
+nodes {
+  position {
+    x: 318.0
+    y: 294.0
+  }
+  scale {
+    x: 2.521872
+    y: 5.501963
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.22
+    y: 0.169
+    z: 0.149
+  }
+  type: TYPE_BOX
+  id: "result"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -7.137555
+    y: 32.170334
+  }
+  scale {
+    x: 0.850938
+    y: 0.223573
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.722
+    y: 0.761
+    z: 0.725
+  }
+  type: TYPE_TEXT
+  text: "DEATH"
+  font: "rf"
+  id: "text"
+  parent: "result"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -5.947962
+    y: -23.809683
+  }
+  scale {
+    x: 0.7809
+    y: 0.333136
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.722
+    y: 0.761
+    z: 0.725
+  }
+  type: TYPE_BOX
+  id: "box"
+  parent: "result"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 0.714143
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.22
+    y: 0.169
+    z: 0.149
+  }
+  type: TYPE_TEXT
+  text: "PLAY AGAIN?"
+  font: "rf"
+  id: "text1"
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -9.516739
+    y: 6.361366
+  }
+  scale {
+    x: 0.399587
+    y: 0.160918
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.722
+    y: 0.761
+    z: 0.725
+  }
+  type: TYPE_TEXT
+  text: "FINAL SCORE: 0"
+  font: "rf"
+  id: "score"
+  parent: "result"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

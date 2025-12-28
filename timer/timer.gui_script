@@ -1,6 +1,13 @@
 function init(self)
-	local node = gui.get_node("box")
-	gui.set_enabled(node, false)
+	self.current_time = 64
+	gui.set_text(gui.get_node("time"),  tostring(self.current_time))
+	local fn = function ()
+		if self.current_time >= 1 then
+			self.current_time = self.current_time - 1
+			gui.set_text(gui.get_node("time"),  tostring(self.current_time))
+		end
+	end
+	self.timer = timer.delay(1, true, fn)
 end
 
 function final(self)
@@ -16,12 +23,6 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("init") then
-		local node = gui.get_node("box")
-		gui.set_enabled(node, false)
-		local fn = function () end
-		timer.delay(2, false, end)
-	end
 end
 
 function on_input(self, action_id, action)
